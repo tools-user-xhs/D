@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>🌐 外贸客户开发技能箱 · 出海引擎</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f0f5fe 0%, #e9f0fa 100%);
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        .toolbox {
+            max-width: 1500px;
+            width: 100%;
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(4px);
+            border-radius: 3rem;
+            padding: 2rem 2rem 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0,20,60,0.25);
+            border: 1px solid rgba(255,255,255,0.6);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #1a2a4f, #2c3e6e);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 15px 35px -15px rgba(20,40,70,0.15);
+            border: 1px solid rgba(255,255,255,0.7);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #14273e;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 2px dashed #b3c7e5;
+            padding-bottom: 0.75rem;
+        }
+
+        .selector-area {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .select-input {
+            background: white;
+            border: 1px solid #d4e0f0;
+            border-radius: 40px;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            color: #14273e;
+            font-weight: 500;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .select-input:focus {
+            border-color: #2f5e9c;
+            box-shadow: 0 0 0 3px #2f5e9c30;
+        }
+
+        .two-col-select {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+        .two-col-select select {
+            flex: 1;
+        }
+
+        .query-btn {
+            background: white;
+            border: 1px solid #b9d0ef;
+            color: #1d3a5c;
+            padding: 0.8rem 1rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .query-btn:hover {
+            background: #e5efff;
+            border-color: #2f5e9c;
+            transform: scale(1.02);
+        }
+
+        .result-panel {
+            background: #f7faff;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            margin-top: 0.8rem;
+            border: 1px solid #e7f0fd;
+            flex: 1;
+            min-height: 520px;
+            overflow-y: auto;
+            max-height: 700px;
+        }
+
+        .method-card {
+            background: white;
+            border-radius: 1.2rem;
+            padding: 1.2rem 1.2rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 6px 14px #dbe4f2;
+            border-left: 5px solid #2f5e9c;
+        }
+
+        .method-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a3a6e;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #eef3fc;
+            padding: 0.5rem 0.8rem;
+            border-radius: 40px;
+        }
+
+        .step-list {
+            margin: 0.8rem 0 0.5rem 1.2rem;
+        }
+        .step-list li {
+            margin-bottom: 0.7rem;
+            line-height: 1.5;
+            font-size: 0.92rem;
+            color: #1f3a57;
+        }
+        .step-list li strong {
+            color: #0f4c81;
+            background: #e8f0fe;
+            padding: 0.1rem 0.4rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .demo-area {
+            background: #eef3fc;
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            margin: 0.8rem 0 0.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            align-items: center;
+        }
+
+        .demo-input {
+            background: white;
+            border: 1px solid #c7daf5;
+            border-radius: 30px;
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            flex: 1 1 160px;
+            color: #102a44;
+        }
+
+        .demo-btn {
+            background: #dce7fc;
+            border: none;
+            border-radius: 30px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #173868;
+            cursor: pointer;
+            border: 1px solid #aec6ee;
+            transition: 0.1s;
+        }
+        .demo-btn:hover {
+            background: #c2d6f5;
+        }
+
+        .tip-badge {
+            background: #eef2fa;
+            border-radius: 30px;
+            padding: 0.3rem 1rem;
+            font-size: 0.75rem;
+            color: #2c6280;
+            display: inline-block;
+            margin-top: 0.6rem;
+        }
+
+        .warning-note {
+            background: #fff2e0;
+            border-left: 4px solid #e67e22;
+            padding: 0.5rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            color: #a15506;
+        }
+
+        .market-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+        .market-region-card {
+            background: white;
+            border-radius: 1.2rem;
+            padding: 1rem;
+            flex: 1 1 calc(50% - 0.5rem);
+            min-width: 150px;
+            border: 1px solid #e3ebf6;
+        }
+        .region-name {
+            font-weight: 700;
+            color: #1e3c72;
+            font-size: 1rem;
+        }
+        .heat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #17345c;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .trend {
+            font-size: 0.85rem;
+            background: #eaf2ff;
+            border-radius: 30px;
+            padding: 0.2rem 0.7rem;
+        }
+        .trend.up { color: #0f7b3a; }
+        .trend.down { color: #b13e3e; }
+        .trend.stable { color: #a0671d; }
+        
+        .action-guide {
+            background: linear-gradient(135deg, #e8f0fe 0%, #dde9fc 100%);
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            margin-top: 1rem;
+            border-left: 5px solid #ff8c42;
+        }
+        .action-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #c95a0f;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .action-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .action-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.88rem;
+            line-height: 1.4;
+            color: #1f3a57;
+        }
+        .action-list li:before {
+            content: "⚡";
+            position: absolute;
+            left: 0;
+            color: #ff8c42;
+        }
+        .quick-tip {
+            background: #fff6e8;
+            border-radius: 0.8rem;
+            padding: 0.6rem 1rem;
+            margin-top: 0.8rem;
+            font-size: 0.8rem;
+            color: #b45f1b;
+        }
+        footer {
+            margin-top: 1.8rem;
+            text-align: center;
+            color: #5b739b;
+            font-size: 0.8rem;
+        }
+        @media (max-width: 900px) {
+            .card-grid { grid-template-columns: 1fr; }
+            .toolbox { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="toolbox">
+    <div class="header">
+        <h1>🧰 外贸客户开发技能箱 · 出海引擎</h1>
+    </div>
+
+    <div class="card-grid">
+        <!-- 卡片1：客户开发渠道（每个渠道至少2种详细方法） -->
+        <div class="card">
+            <div class="card-title">📢 客户开发渠道 · 手把手教学</div>
+            <div class="selector-area">
+                <select class="select-input" id="socialSelect1">
+                    <option value="google">🌐 Google (谷歌地图/高级搜索)</option>
+                    <option value="linkedin">💼 LinkedIn</option>
+                    <option value="facebook">📘 Facebook</option>
+                    <option value="instagram">📸 Instagram</option>
+                    <option value="tiktok">🎵 TikTok</option>
+                    <option value="twitter">🐦 Twitter (X)</option>
+                    <option value="whatsapp">💬 WhatsApp</option>
+                    <option value="youtube">▶️ YouTube</option>
+                </select>
+                <button class="query-btn" id="queryChannelBtn">🔍 查看详细开发方法</button>
+            </div>
+            <div class="result-panel" id="channelResult">👈 选择平台，获取分步骤操作指南</div>
+        </div>
+
+        <!-- 卡片2：市场透视（含行动指南） -->
+        <div class="card">
+            <div class="card-title">🌍 市场透视 · 趋势洞察与行动指南</div>
+            <div class="selector-area">
+                <div class="two-col-select">
+                    <select class="select-input" id="industrySelect"></select>
+                    <select class="select-input" id="productSelect"></select>
+                </div>
+                <button class="query-btn" id="queryMarketBtn">📊 查询市场透视 & 行动建议</button>
+            </div>
+            <div class="result-panel" id="marketResult">📈 选择行业与产品，获取市场热度及针对性开发策略</div>
+        </div>
+
+        <!-- 卡片3：社媒内容创作 -->
+        <div class="card">
+            <div class="card-title">🎬 社媒内容创作</div>
+            <div class="selector-area">
+                <select class="select-input" id="socialSelect3">
+                    <option value="tiktok">TikTok 短视频</option>
+                    <option value="instagram">Instagram Reels</option>
+                    <option value="youtube">YouTube Shorts</option>
+                    <option value="facebook">Facebook Reels</option>
+                    <option value="linkedin">LinkedIn 专业视频</option>
+                    <option value="twitter">Twitter 视频</option>
+                </select>
+                <button class="query-btn" id="queryContentBtn">💡 获取创作技巧</button>
+            </div>
+            <div class="result-panel" id="contentResult">🎥 选择平台，获取内容创作策略</div>
+        </div>
+    </div>
+    <footer>✨ 每个渠道提供2种以上详细开发方法，分步骤说明，新手也能跟着操作 | 市场趋势包含行动指南</footer>
+</div>
+
+<script>
+    (function() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        function init() {
+            // ========== 行业数据（玩具类目产品已极大扩充） ==========
+            const industryProducts = {
+                electronics: { name: '电子产品', products: [
+                    { value: 'smartphone', label: '智能手机' }, { value: 'laptop', label: '笔记本电脑' },
+                    { value: 'headphones', label: '耳机' }, { value: 'smartwatch', label: '智能手表' }
+                ] },
+                luggage: { name: '箱包', products: [{ value: 'suitcase', label: '拉杆箱' }, { value: 'backpack', label: '双肩包' }] },
+                outdoor_travel: { name: '户外旅行', products: [{ value: 'tent', label: '帐篷' }, { value: 'hiking_shoes', label: '登山鞋' }] },
+                home_essentials: { name: '居家用品', products: [{ value: 'storage_box', label: '收纳盒' }, { value: 'shelf', label: '置物架' }] },
+                textiles: { name: '纺织品', products: [{ value: 'garments', label: '服装' }] },
+                machinery: { name: '机械设备', products: [{ value: 'cnc', label: '数控机床' }] },
+                furniture: { name: '家居用品', products: [{ value: 'sofa', label: '沙发' }] },
+                toys: { name: '🧸 玩具', products: [
+                    { value: 'educational_toys', label: '益智玩具' }, { value: 'plush_toys', label: '毛绒玩具' },
+                    { value: 'remote_car', label: '遥控车' }, { value: 'building_blocks', label: '积木套装' },
+                    { value: 'dolls', label: '玩偶/娃娃' }, { value: 'outdoor_toys', label: '户外玩具' },
+                    { value: 'puzzle_games', label: '拼图游戏' }, { value: 'board_games', label: '桌游' },
+                    { value: 'infant_toys', label: '婴儿玩具' }, { value: 'wooden_toys', label: '木制玩具' }
+                ] }
+            };
+
+            const socialSelect1 = document.getElementById('socialSelect1');
+            const queryChannelBtn = document.getElementById('queryChannelBtn');
+            const channelResult = document.getElementById('channelResult');
+            const industrySelect = document.getElementById('industrySelect');
+            const productSelect = document.getElementById('productSelect');
+            const queryMarketBtn = document.getElementById('queryMarketBtn');
+            const marketResult = document.getElementById('marketResult');
+            const socialSelect3 = document.getElementById('socialSelect3');
+            const queryContentBtn = document.getElementById('queryContentBtn');
+            const contentResult = document.getElementById('contentResult');
+
+            for (let key in industryProducts) {
+                let opt = document.createElement('option');
+                opt.value = key;
+                opt.textContent = industryProducts[key].name;
+                industrySelect.appendChild(opt);
+            }
+            industrySelect.value = 'electronics';
+            function updateProductSelect(industryKey) {
+                const products = industryProducts[industryKey]?.products || [];
+                productSelect.innerHTML = '';
+                products.forEach(p => {
+                    let opt = document.createElement('option');
+                    opt.value = p.value;
+                    opt.textContent = p.label;
+                    productSelect.appendChild(opt);
+                });
+            }
+            updateProductSelect('electronics');
+            industrySelect.addEventListener('change', (e) => updateProductSelect(e.target.value));
+
+            // ========== 1. 每个渠道至少2种详细方法，分步骤说明 ==========
+            function getDetailedMethods(platform) {
+                const methods = {
+                    google: `
+                        <div class="method-card">
+                            <div class="method-title">📍 方法一：Google Maps 地毯式挖掘客户</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>打开 Google Maps，定位目标国家/城市（如 "Los Angeles"）</li>
+                                <li><strong>第2步：</strong>在搜索框输入 "产品关键词 + importer/distributor/wholesale"（例如 "toy distributor"）</li>
+                                <li><strong>第3步：</strong>浏览搜索结果，点击店铺查看详情，记录公司名称、电话、官网</li>
+                                <li><strong>第4步：</strong>访问官网找到 Contact 页面，获取邮箱；或在 LinkedIn 搜索该公司 + "purchasing manager"</li>
+                                <li><strong>第5步：</strong>发送开发信，介绍产品优势和样品政策，附上产品目录</li>
+                            </ul>
+                            <div class="demo-area">
+                                <input class="demo-input" id="googleMapDemo" value="toy wholesale Chicago">
+                                <button class="demo-btn" onclick="alert('模拟：在Google Maps搜索「'+document.getElementById('googleMapDemo').value+'」，获取至少10家批发商信息。')">🔎 模拟搜索</button>
+                            </div>
+                            <div class="tip-badge">💡 小技巧：使用 "site:公司官网 purchasing manager" 直接找决策人邮箱</div>
+                        </div>
+                        <div class="method-card">
+                            <div class="method-title">🔎 方法二：Google 高级搜索指令找采购商</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>在 Google 输入 intitle:"buyer" + 产品词（如 intitle:"buyer" toys）</li>
+                                <li><strong>第2步：</strong>输入 inurl:contact + 产品词，查找有联系页面的潜在客户</li>
+                                <li><strong>第3步：</strong>搜索 "产品名 + exhibition exhibitor list" 获取展会参展商名单</li>
+                                <li><strong>第4步：</strong>搜索 "产品名 + importer list filetype:pdf" 获取进口商名录PDF</li>
+                                <li><strong>第5步：</strong>整理收集到的公司名，逐一在LinkedIn上找决策人</li>
+                            </ul>
+                            <div class="demo-area">
+                                <input class="demo-input" id="googleAdvDemo" value="educational toys importer">
+                                <button class="demo-btn" onclick="alert('高级搜索模拟：intitle:\"buyer\" '+document.getElementById('googleAdvDemo').value+' → 筛选前20条结果。')">⚡ 执行模拟</button>
+                            </div>
+                        </div>
+                    `,
+                    linkedin: `
+                        <div class="method-card">
+                            <div class="method-title">💼 方法一：LinkedIn 精准搜索+邀请决策人</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>完善个人档案，标题写明 "Sales Manager | [产品] Supplier"</li>
+                                <li><strong>第2步：</strong>在搜索框输入 "目标公司名 + purchasing manager / procurement / sourcing"</li>
+                                <li><strong>第3步：</strong>筛选"二级人脉"或"三级人脉"，点击"Connect"发送邀请</li>
+                                <li><strong>第4步：</strong>邀请语示例："Hi [Name], I'm a [产品] manufacturer. Would love to connect and share our catalog."</li>
+                                <li><strong>第5步：</strong>通过后发送简短消息，附上产品目录PDF或工厂视频链接</li>
+                            </ul>
+                            <div class="demo-area">
+                                <input class="demo-input" id="liDemo" value="Hasbro">
+                                <button class="demo-btn" onclick="alert('领英演示：搜索'+document.getElementById('liDemo').value+' 的采购经理，发送个性化邀请。')">🔍 模拟</button>
+                            </div>
+                            <div class="warning-note">⚠️ 每周添加20-30人，避免频繁操作触发限制。邀请语要个性化，不要复制粘贴。</div>
+                        </div>
+                        <div class="method-card">
+                            <div class="method-title">📢 方法二：LinkedIn 内容营销吸引客户主动询盘</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>每周发布2-3篇专业内容：产品实拍视频、工厂生产线、客户案例</li>
+                                <li><strong>第2步：</strong>使用行业标签 #B2B #manufacturing #产品关键词 #supplier</li>
+                                <li><strong>第3步：</strong>关注行业KOL，每天花10分钟评论他们的帖子，增加曝光</li>
+                                <li><strong>第4步：</strong>当潜在客户点赞或评论你的内容时，主动私信感谢并介绍自己</li>
+                                <li><strong>第5步：</strong>定期更新"Featured"区域，展示产品目录和工厂认证</li>
+                            </ul>
+                            <div class="demo-area"><button class="demo-btn" onclick="alert('示例：发布工厂实拍视频，添加#toymanufacturer，吸引采购商主动联系。')">📱 内容模拟</button></div>
+                        </div>
+                    `,
+                    facebook: `
+                        <div class="method-card">
+                            <div class="method-title">📘 方法一：Facebook 群组精准开发</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>在Facebook搜索 "产品词 + buyers/importers/wholesale"（如 "toy importers group"）</li>
+                                <li><strong>第2步：</strong>申请加入5-10个活跃群组，等待管理员批准</li>
+                                <li><strong>第3步：</strong>进群后先观察1周，了解群规和成员活跃情况</li>
+                                <li><strong>第4步：</strong>参与讨论，回答行业问题，建立专业形象（不要直接发广告）</li>
+                                <li><strong>第5步：</strong>私信群主或在群内发布"价值内容"（如行业报告），引导私信咨询</li>
+                            </ul>
+                            <div class="demo-area"><button class="demo-btn" onclick="alert('模拟：搜索「toy importers group」，加入后观察一周，再私信活跃成员。')">📢 模拟群组开发</button></div>
+                        </div>
+                        <div class="method-card">
+                            <div class="method-title">🛒 方法二：Facebook Marketplace 找批发买家</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>将Facebook地区切换到目标市场（如美国）</li>
+                                <li><strong>第2步：</strong>进入Marketplace，搜索 "wholesale + 产品词" 或 "bulk + 产品词"</li>
+                                <li><strong>第3步：</strong>查看卖家资料，筛选出批发商或零售商账号</li>
+                                <li><strong>第4步：</strong>点击"Message"，发送简短介绍："Hi, we're a [产品] manufacturer. Do you buy wholesale?"</li>
+                                <li><strong>第5步：</strong>跟进发送产品目录和样品政策</li>
+                            </ul>
+                            <div class="demo-area"><button class="demo-btn" onclick="alert('模拟：Marketplace搜索「wholesale toys」，筛选美国卖家，发送供应信息。')">🛍️ 模拟挖掘</button></div>
+                        </div>
+                    `,
+                    instagram: `
+                        <div class="method-card">
+                            <div class="method-title">📸 方法一：标签+私信精准触达</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>在Instagram搜索标签 #产品wholesale、#产品supplier、#产品business</li>
+                                <li><strong>第2步：</strong>浏览帖子，筛选出品牌方、零售商、设计师账号（粉丝1千-10万）</li>
+                                <li><strong>第3步：</strong>先点赞3-5条他们的帖子，再发送私信</li>
+                                <li><strong>第4步：</strong>私信内容："Hi! Love your page. We manufacture [产品], DM me for catalog if interested."</li>
+                                <li><strong>第5步：</strong>对回复的客户，发送产品目录PDF和样品政策</li>
+                            </ul>
+                            <div class="demo-area">
+                                <input class="demo-input" id="igTag" value="#toyswholesale">
+                                <button class="demo-btn" onclick="alert('搜索 '+document.getElementById('igTag').value+'，筛选5个品牌账号私信。')">🔎 模拟</button>
+                            </div>
+                        </div>
+                        <div class="method-card">
+                            <div class="method-title">🤝 方法二：通过网红/KOC合作开发B端客户</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>搜索 #产品influencer 或 #产品review，找到行业微网红（粉丝1万-10万）</li>
+                                <li><strong>第2步：</strong>查看简介，找到合作邮箱或通过私信联系</li>
+                                <li><strong>第3步：</strong>发送合作邀约："We'd love to send you free samples for review. Are you open to collaboration?"</li>
+                                <li><strong>第4步：</strong>网红发布评测后，其粉丝中的B端买家可能会主动联系你</li>
+                                <li><strong>第5步：</strong>在评测评论区互动，吸引潜在客户</li>
+                            </ul>
+                            <div class="demo-area"><button class="demo-btn" onclick="alert('模拟：搜索 #toyinfluencer，联系3位微网红提供样品换评测。')">🎯 模拟合作</button></div>
+                        </div>
+                    `,
+                    tiktok: `
+                        <div class="method-card">
+                            <div class="method-title">🎵 方法一：短视频引流获客</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>拍摄15-30秒产品展示视频，突出使用场景或工厂生产</li>
+                                <li><strong>第2步：</strong>选择热门音乐，添加字幕"DM for wholesale price"</li>
+                                <li><strong>第3步：</strong>添加标签 #外贸 #产品名 #B2B #manufacturer #wholesale</li>
+                                <li><strong>第4步：</strong>发布后1小时内回复所有评论，引导私信咨询</li>
+                                <li><strong>第5步：</strong>每周直播1-2次，展示工厂和产品，实时回答采购问题</li>
+                            </ul>
+                            <div class="demo-area"><button class="demo-btn" onclick="alert('模拟：发布30秒玩具视频，添加#toyswholesale，评论区引导私信。')">📱 内容演示</button></div>
+                        </div>
+                        <div class="method-card">
+                            <div class="method-title">👥 方法二：主动关注+私信竞争对手粉丝</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>搜索行业头部品牌或工厂账号（如竞争对手）</li>
+                                <li><strong>第2步：</strong>进入粉丝列表，筛选关注了多个竞品的用户（可能是潜在采购商）</li>
+                                <li><strong>第3步：</strong>关注这些用户，点赞他们3-5条内容</li>
+                                <li><strong>第4步：</strong>发送私信："Hi! Saw you follow [competitor]. We offer similar products with better quality. Want to see catalog?"</li>
+                                <li><strong>第5步：</strong>跟进发送产品目录和样品政策</li>
+                            </ul>
+                            <div class="demo-area"><button class="demo-btn" onclick="alert('模拟：找到竞品账号，查看粉丝列表，筛选潜在买家私信。')">🎯 模拟挖掘</button></div>
+                        </div>
+                    `,
+                    twitter: `
+                        <div class="method-card">
+                            <div class="method-title">🐦 方法一：行业话题切入开发</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>关注行业KOL和话题标签 #sourcing、#manufacturer、#产品名</li>
+                                <li><strong>第2步：</strong>搜索 "looking for + 产品词" 或 "buying + 产品词" 找到采购需求推文</li>
+                                <li><strong>第3步：</strong>回复推文："We're a manufacturer of [产品]. DM me for catalog."</li>
+                                <li><strong>第4步：</strong>发布产品短视频，使用 #supplier #wholesale 标签</li>
+                                <li><strong>第5步：</strong>定期@潜在客户，分享行业资讯建立专业形象</li>
+                            </ul>
+                            <div class="demo-area"><button class="demo-btn" onclick="alert('模拟：搜索 #buyingtoys 推文，回复采购意向用户。')">🐦 模拟开发</button></div>
+                        </div>
+                        <div class="method-card">
+                            <div class="method-title">📋 方法二：Twitter列表+高级搜索</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>创建"潜在客户"列表，将发现的客户账号加入</li>
+                                <li><strong>第2步：</strong>使用高级搜索："产品词 + near:城市 within:10mi" 挖掘本地商家</li>
+                                <li><strong>第3步：</strong>每天花10分钟浏览列表动态，及时回复互动</li>
+                                <li><strong>第4步：</strong>对列表中的客户定期点赞，保持存在感</li>
+                                <li><strong>第5步：</strong>当客户发布采购需求时，第一时间回复</li>
+                            </ul>
+                            <div class="demo-area"><button class="demo-btn" onclick="alert('模拟：创建「Toy Buyers」列表，监控客户动态。')">📋 模拟列表</button></div>
+                        </div>
+                    `,
+                    whatsapp: `
+                        <div class="method-card">
+                            <div class="method-title">💬 方法一：展会/海关数据直联客户</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>从展会名片、海关数据、LinkedIn获取潜在客户的手机号</li>
+                                <li><strong>第2步：</strong>保存号码到手机，打开WhatsApp确认对方是否在线</li>
+                                <li><strong>第3步：</strong>发送首条消息："Hi [Name], this is [Your Name] from [Company]. We manufacture [产品]. May I share our catalog?"</li>
+                                <li><strong>第4步：</strong>客户回复后，发送产品目录PDF和工厂照片</li>
+                                <li><strong>第5步：</strong>跟进发送样品视频，邀约样品测试</li>
+                            </ul>
+                            <div class="demo-area">
+                                <input class="demo-input" placeholder="+1 123 456 7890" id="waPhone">
+                                <button class="demo-btn" onclick="alert('模拟发送消息到 '+document.getElementById('waPhone').value)">📩 模拟消息</button>
+                            </div>
+                        </div>
+                        <div class="method-card">
+                            <div class="method-title">👥 方法二：WhatsApp行业群组开发</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>通过展会、Facebook群组、行业论坛获取WhatsApp群组链接</li>
+                                <li><strong>第2步：</strong>加入"Global Importers"、"[产品] Buyers"等群组</li>
+                                <li><strong>第3步：</strong>进群后先观察，了解群内成员身份和聊天氛围</li>
+                                <li><strong>第4步：</strong>分享行业资讯或产品知识，建立专业形象</li>
+                                <li><strong>第5步：</strong>私信群内活跃成员，介绍产品和合作方式</li>
+                            </ul>
+                            <div class="demo-area"><button class="demo-btn" onclick="alert('模拟：加入「Global Toy Importers」群组，参与讨论后私信成员。')">👥 模拟入群</button></div>
+                        </div>
+                    `,
+                    youtube: `
+                        <div class="method-card">
+                            <div class="method-title">🎥 方法一：评论区挖掘潜在客户</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>搜索产品关键词 + review/unboxing（如 "toy unboxing"）</li>
+                                <li><strong>第2步：</strong>筛选播放量高、评论区活跃的视频</li>
+                                <li><strong>第3步：</strong>浏览评论区，寻找 "Where to buy?" "How to order?" "I need a supplier" 等评论</li>
+                                <li><strong>第4步：</strong>回复评论："We are a manufacturer. DM us on IG/LinkedIn for catalog."</li>
+                                <li><strong>第5步：</strong>点击评论者头像查看简介，若有公司信息则通过LinkedIn开发</li>
+                            </ul>
+                            <div class="demo-area">
+                                <input class="demo-input" id="ytKeyword" value="toy review">
+                                <button class="demo-btn" onclick="alert('模拟：搜索'+document.getElementById('ytKeyword').value+'，筛选采购意向评论。')">📝 模拟找客户</button>
+                            </div>
+                        </div>
+                        <div class="method-card">
+                            <div class="method-title">📧 方法二：通过YouTube创作者/博主开发B2B</div>
+                            <ul class="step-list">
+                                <li><strong>第1步：</strong>搜索产品关键词 + reviewer/unboxing，找到行业博主</li>
+                                <li><strong>第2步：</strong>查看频道"About"页面，寻找商业合作邮箱</li>
+                                <li><strong>第3步：</strong>发送邮件："Hi, we noticed your channel. We'd love to send you free samples for review."</li>
+                                <li><strong>第4步：</strong>博主发布评测后，在视频描述区添加你的官网链接</li>
+                                <li><strong>第5步：</strong>评测视频会吸引其粉丝中的B端买家主动联系你</li>
+                            </ul>
+                            <div class="demo-area"><button class="demo-btn" onclick="alert('模拟：找到行业博主，发送合作邮件提供免费样品。')">📩 模拟合作</button></div>
+                        </div>
+                    `
+                };
+                return methods[platform] || `<div class="method-card">选择平台查看详细开发方法</div>`;
+            }
+
+            // ========== 2. 市场透视：基于日期种子稳定趋势 + 行动指南 ==========
+            function getDateSeed() {
+                const today = new Date();
+                return `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`;
+            }
+            function stableHashRange(str, range) {
+                let hash = 0;
+                for (let i = 0; i < str.length; i++) {
+                    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+                    hash |= 0;
+                }
+                return Math.abs(hash) % range;
+            }
+            
+            function generateActionGuide(regionData, productName) {
+                const hotMarkets = regionData.filter(r => r.heat >= 75 && (r.trend === 'up' || r.trend === 'stable'));
+                const upMarkets = regionData.filter(r => r.trend === 'up');
+                
+                let actions = [];
+                if (hotMarkets.length > 0) {
+                    actions.push(`🔥 重点开发【${hotMarkets.slice(0,3).map(m=>m.name).join('、')}】热度市场，优先使用LinkedIn+Google Maps组合开发。`);
+                }
+                if (upMarkets.length > 0) {
+                    actions.push(`📈 抓住【${upMarkets.map(m=>m.name).join('、')}】上升趋势，提前布局社交媒体内容抢占流量。`);
+                }
+                actions.push(`🎯 针对【${productName}】，建议用LinkedIn搜索"${productName} buyer"，配合Google Maps挖掘当地经销商。`);
+                
+                const quickActions = [
+                    `📧 为${hotMarkets.length>0?hotMarkets[0].name:'北美'}市场准备定制化开发信`,
+                    `🔍 在Google Maps搜索"${productName} wholesale"获取客户清单`,
+                    `📱 针对上升市场策划一条15秒产品亮点短视频`
+                ];
+                return { actions, quickActions };
+            }
+            
+            let marketCache = new Map();
+            let cachedDate = null;
+            function getStableMarketHTML(industryKey, productValue) {
+                const currentDate = getDateSeed();
+                if (cachedDate !== currentDate) {
+                    marketCache.clear();
+                    cachedDate = currentDate;
+                }
+                const cacheKey = `${industryKey}|${productValue}`;
+                if (marketCache.has(cacheKey)) return marketCache.get(cacheKey);
+                
+                const industry = industryProducts[industryKey]?.name || industryKey;
+                const product = industryProducts[industryKey]?.products.find(p => p.value === productValue)?.label || productValue;
+                const regions = [
+                    { name: '北美', base: 90 }, { name: '欧洲', base: 85 }, { name: '澳洲', base: 75 },
+                    { name: '日韩', base: 82 }, { name: '东南亚', base: 70 }, { name: '中东', base: 65 }, { name: '南美', base: 60 }
+                ];
+                const seedStr = `${currentDate}_${industryKey}_${productValue}`;
+                const regionData = regions.map(r => {
+                    const heatOffset = stableHashRange(seedStr + r.name + "_heat", 21) - 10;
+                    let heat = Math.min(99, Math.max(50, r.base + heatOffset));
+                    const trendVal = stableHashRange(seedStr + r.name + "_trend", 100);
+                    let trend = 'stable';
+                    if (trendVal < 33) trend = 'up';
+                    else if (trendVal < 66) trend = 'down';
+                    let trendIcon = trend === 'up' ? '↑' : (trend === 'down' ? '↓' : '→');
+                    let trendText = trend === 'up' ? '上升' : (trend === 'down' ? '下降' : '稳定');
+                    return { name: r.name, heat, trend, trendIcon, trendText };
+                });
+                
+                const actionGuide = generateActionGuide(regionData, product);
+                const regionHtml = regionData.map(r => `
+                    <div class="market-region-card">
+                        <div class="region-name">${r.name}</div>
+                        <div class="heat-value">${r.heat}<span class="trend ${r.trend}">${r.trendIcon} ${r.trendText}</span></div>
+                    </div>
+                `).join('');
+                
+                const fullHtml = `
+                    <div><strong>${industry} / ${product}</strong><div style="font-size:0.7rem;">📅 ${currentDate}</div></div>
+                    <div class="market-grid">${regionHtml}</div>
+                    <div class="action-guide">
+                        <div class="action-title">🎯 基于趋势的行动指南</div>
+                        <ul class="action-list">${actionGuide.actions.map(a => `<li>${a}</li>`).join('')}</ul>
+                        <div class="quick-tip"><strong>⚡ 今日3步行动：</strong><br>${actionGuide.quickActions.map((a,i)=>`${i+1}. ${a}`).join('<br>')}</div>
+                    </div>
+                `;
+                marketCache.set(cacheKey, fullHtml);
+                return fullHtml;
+            }
+            function renderMarket() {
+                marketResult.innerHTML = getStableMarketHTML(industrySelect.value, productSelect.value);
+            }
+
+            // ========== 3. 社媒内容创作 ==========
+            function getDetailedContentGuide(media) {
+                const guides = {
+                    tiktok: { steps: ["竖屏9:16拍摄", "黄金3秒点明优势", "热门音乐", "字幕'DM for wholesale'", "#外贸 #B2B标签"], caution: "每周3-5条" },
+                    instagram: { steps: ["Canva制作封面", "前5秒使用场景", "#产品wholesale", "结尾引导link in bio"], caution: "每日1条" },
+                    youtube: { steps: ["产品对比/开箱", "标题用问题吸引", "竖屏+字幕", "描述留官网"], caution: "可关联长视频" },
+                    facebook: { steps: ["展示生产线", "当地时间9-11点发布", "分享到群组"], caution: "先贡献价值" },
+                    linkedin: { steps: ["行业趋势分析", "工厂背景", "#外贸 #manufacturing", "@潜在客户"], caution: "内容专业" },
+                    twitter: { steps: ["30秒新品", "#supplier #wholesale", "回复KOL"], caution: "每周2-3条" }
+                };
+                const g = guides[media] || guides.tiktok;
+                return `<div class="method-card"><div class="method-title">📝 ${media.toUpperCase()} 创作指南</div><ul class="step-list">${g.steps.map(s=>`<li>✅ ${s}</li>`).join('')}</ul><div class="caution-box">⚠️ ${g.caution}</div></div>`;
+            }
+
+            function renderChannel() { channelResult.innerHTML = getDetailedMethods(socialSelect1.value); }
+            function renderContent() { contentResult.innerHTML = getDetailedContentGuide(socialSelect3.value); }
+
+            queryChannelBtn.addEventListener('click', renderChannel);
+            queryMarketBtn.addEventListener('click', renderMarket);
+            queryContentBtn.addEventListener('click', renderContent);
+
+            renderChannel();
+            renderMarket();
+            renderContent();
+        }
+    })();
+</script>
+</body>
+</html>
